@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+    admin:
+        container_name: media-admin
+        image: sancdocker/eedureka_media_admin_app_image
+        restart: always
+        ports:
+          - "8801:8801"
+        networks:
+          - medianet
+
+    cust:
+        container_name: media-cust
+        image: sancdocker/edureka_media_customer_app_image
+        restart: always
+        ports:
+          - "8800:8800"
+        networks:
+          - medianet
+
+    reverseproxy:
+        container_name: media-nginx
+        image: sancdocker/media-nginx
+        ports:
+          - "80:8080"
+        networks:
+          - medianet
+
+networks:
+  medianet:
+    driver: bridge
